@@ -21,6 +21,20 @@ endif()
 set(PostgreSQL_ADDITIONAL_VERSIONS 14)
 find_package(PostgreSQL REQUIRED)
 
+function(get_postgre_sql_bin result_var_name)
+    get_target_property(postgre_sql_include_directories PostgreSQL::PostgreSQL INTERFACE_INCLUDE_DIRECTORIES)
+    
+    list(GET postgre_sql_include_directories 0 postgre_sql_first_include_dir)
+    
+    cmake_path(GET postgre_sql_first_include_dir PARENT_PATH postgre_sql_root)
+    
+    cmake_path(APPEND postgre_sql_root bin OUTPUT_VARIABLE POSTGRE_SQL_BIN)
+    
+    set(${result_var_name} "${POSTGRE_SQL_BIN}" PARENT_SCOPE)
+endfunction()
+
+get_postgre_sql_bin(POSTGRE_SQL_BIN)
+
 # Fetch and setup libpqxx dependency
     include(FetchContent)
     
