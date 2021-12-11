@@ -16,7 +16,7 @@ int main()
     try
     {
         std::ostringstream ss;
-        ss << "dbname = " << dbname << " user = " << dbuser << " password = " << dbuser << " hostaddr = 127.0.0.1 port = 5432";
+        ss << "dbname = " << dbname << " user = " << dbuser << " password = " << dbpass << " hostaddr = 127.0.0.1 port = 5432";
         
         pqxx::connection connection( ss.str() );
         if( connection.is_open() )
